@@ -16,3 +16,21 @@
 
     We thank you kindly for your business.
   
+  Receipt from: Tue Dec 03 2019 at the World-Famous Pokemon Cafe
+  --------------------------------------------
+  
+      - Pikachu Steak: $1000
+    
+      - Beyond Bulbasaur Burger: $200
+    
+      - Magikarp Fish and Chips : $150
+    
+      - Drink: $50
+    
+      - Drink: $50
+    
+  -------------------------------------------
+  Order total: $1450
+
+  We appreciate your business!
+  

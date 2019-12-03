@@ -1,35 +1,50 @@
-// Today we'll be building out a restaurant simulator with the following requirements:
+// App requirements:
 // - The app should present us with a menu
-// - Users should press a number to select an option from the menu
+// - Users should press a key to select an option from the menu
 //   - When selected an item will start being processed
 // - Users should be able to select more items while others are being processed
 // - When an item is done processing, it should be served to us (via `console.log` 🤷‍♂️)
-// - press 'p' to save a receipt
+// - press 'r' to save a receipt
 
-console.log('Welcome to our restaurant!')
+const fs = require('fs')
 
-// console.log(`
-//   1 - Menu item 1
-//   2 - Menu item 2
-//   3 - Menu item 3
-// `)
-// // ^ this is hacky and hardcoded, let's write it in a way we can reuse
+console.log(`👋 Welcome to the Pokemon Cafe!`)
 
 const menu = {
-  b: { name: 'Burger', time: 5000 },
-  f: { name: 'Fries', time: 4000 },
-  m: { name: 'Milkshake', time: 2000 },
-  h: { name: 'Hot Dog', time: 350 },
-  c: { name: 'Coke', time: 20 },
-  s: { name: 'Sprite', time: 20 }
+  s: {
+    name: 'Pikachu Steak',
+    cookTime: 10000,
+    price: 1000
+  },
+  b: {
+    name: 'Beyond Bulbasaur Burger',
+    cookTime: 2000,
+    price: 200
+  },
+  p: {
+    name: 'Peking Psyduck',
+    cookTime: 1000,
+    price: 500
+  },
+  f: {
+    name: 'Magikarp Fish and Chips ',
+    cookTime: 500,
+    price: 150
+  },
+  d: {
+    name: 'Drink',
+    cookTime: 100,
+    price: 50
+  }
 }
 
-
 const printMenu = () => {
-  for (let menuItem in menu) {
-    console.log(`Press ${menuItem} to order ${menu[menuItem].name}`)
+  for (let menuItemKey in menu) {
+    console.log(`Press ${menuItemKey} for ${menu[menuItemKey].name} which costs $${menu[menuItemKey].price}`)
   }
-  console.log(`Press p to save your order receipt`)
+
+  console.log(`Press r to print a receipt`)
+  console.log(`Press m to show the menu again`)
 }
 
 printMenu()
@@ -41,25 +56,24 @@ const userInput = process.stdin
 userInput.setRawMode(true)
 userInput.setEncoding('utf8')
 
-// all you need to know is that `userInput` has a special way of listening for key presses
-// we'll need to wait for user input and provide a way to quit
-
 userInput.on('data', data => {
   if (data === '\u0003') {
     process.exit()
-  } else if (menu[data]) {
-    console.log(`Right on dude! We have that item!`)
+  } else if (data === 'r') {
+    console.log(`🧾 printing receipt.....`)
     
+    console.table(orders)
+  } else if (data === 'm') {
+    printMenu()
+  } else if (menu[data]) {
     orders.push(menu[data])
 
+    console.log(`ORDER IN!!!! We will start working on your ${menu[data].name} right away, you've been charged $${menu[data].price}`)
+
     setTimeout(() => {
-      console.log(`🔔 Here's your ${menu[data].name}`)
-    }, menu[data].time)
-  } else if (data === 'p') {
-    console.log('🧾 Printing receipt...')
-    console.log(orders)
+      console.log(`🛎 Order up! Enjoy your ${menu[data].name}`)
+    }, menu[data].cookTime)
   } else {
-    console.log(`Sorry brah, it doesn't look like we have that item`)
+    console.log(`Sorry Master Pokemon Trainer, we don't have that item`)
   }
 })
-
