@@ -27,7 +27,7 @@ const menu = {
     price: 500
   },
   f: {
-    name: 'Magikarp Fish and Chips ',
+    name: 'Magikarp Fish and Chips',
     cookTime: 500,
     price: 150
   },
